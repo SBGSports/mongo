@@ -290,7 +290,11 @@ inline size_t strnlen(const char *s, size_t maxlen) {
 
 using namespace std;  // just like VC++, we need a using here
 
-// Doesn't exist on OSX; used in google.cc for send() to mean "no flags".
+// Did't exist on OSX; used in google.cc for send() to mean "no flags".
+// Though newer SDK seem to define it so undef it just in case.
+#ifdef __APPLE__
+#undef MSG_NOSIGNAL
+#endif
 #define MSG_NOSIGNAL 0
 
 // No SIGPWR on MacOSX.  SIGINFO seems suitably obscure.

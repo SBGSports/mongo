@@ -131,7 +131,11 @@
 #if !defined(DPML_SIGNAL) && !defined(MINIMAL_SILENT_MODE_EXCEPTION_HANDLER) && \
     !defined(wnt)
 
-#   include <sys/signal.h>
+#   ifdef __APPLE__
+#       include <signal.h>
+#   else
+#       include <sys/signal.h>
+#   endif
 #   define DPML_SIGNAL(p)	 raise(SIGFPE)
 
 #else
